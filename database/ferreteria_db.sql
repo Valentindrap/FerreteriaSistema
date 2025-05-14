@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-05-2025 a las 06:57:17
+-- Tiempo de generación: 14-05-2025 a las 16:37:33
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ferreteria_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(11) NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `contrasena` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `admins`
+--
+
+INSERT INTO `admins` (`id`, `usuario`, `contrasena`) VALUES
+(2, 'valen', '$2y$10$J8shxZAI33w7IZQ23ARvKuR0O8o/6nOHiiM8sweaCFeOqVwNhM3kq');
 
 -- --------------------------------------------------------
 
@@ -84,8 +103,7 @@ CREATE TABLE `movimientocuenta` (
   `id` int(11) NOT NULL,
   `cliente_id` int(11) DEFAULT NULL,
   `tipo` varchar(50) DEFAULT NULL,
-  `monto` decimal(10,2) DEFAULT NULL,
-  `fecha` date DEFAULT NULL
+  `monto` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -118,6 +136,13 @@ CREATE TABLE `producto` (
   `precio_venta` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `nombre`, `codigo`, `categoria`, `proveedor_id`, `stock_actual`, `stock_minimo`, `precio_venta`) VALUES
+(1, 'valen', '23', 'tornillo', 1, 200, 10, 120.00);
+
 -- --------------------------------------------------------
 
 --
@@ -130,6 +155,14 @@ CREATE TABLE `proveedor` (
   `contacto` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`id`, `nombre`, `contacto`, `email`) VALUES
+(1, 'valen', '2302435563', 'Taniajazmin101@gmail.com'),
+(3, 'pablo', '34534545', 'pablo@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -148,6 +181,13 @@ CREATE TABLE `venta` (
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `usuario` (`usuario`);
 
 --
 -- Indices de la tabla `cliente`
@@ -215,6 +255,12 @@ ALTER TABLE `venta`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
@@ -242,13 +288,13 @@ ALTER TABLE `pedidoproveedor`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `venta`

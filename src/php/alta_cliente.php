@@ -8,10 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $direccion = $_POST["direccion"];
     $email = $_POST["email"];
 
-    // Corregir la consulta SQL con los parámetros correctos
+
     $sql = "INSERT INTO cliente (nombre, DNI_CUIT, telefono, direccion, email) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conexion->prepare($sql);
-    // Bind de todos los parámetros
+
     $stmt->bind_param("siiss", $nombre, $DNI_CUIT, $telefono, $direccion, $email);
 
     if ($stmt->execute()) {
