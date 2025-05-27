@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Verifica si hay una sesión iniciada de administrador
+if (!isset($_SESSION['admin'])) {
+    header("Location: adminlogin.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>

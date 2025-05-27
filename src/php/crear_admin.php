@@ -1,8 +1,8 @@
 <?php
 include("conexion.php");
 
-$usuario = "valen";
-$contrasena = password_hash("1234", PASSWORD_DEFAULT);
+$usuario = "admin";
+$contrasena = password_hash("admin1234", PASSWORD_DEFAULT);
 
 $sql = "INSERT INTO admins (usuario, contrasena) VALUES (?, ?)";
 $stmt = $conexion->prepare($sql);
