@@ -9,7 +9,7 @@ $stmt = $conexion->prepare($sql);
 $stmt->bind_param("ss", $usuario, $contrasena);
 
 if ($stmt->execute()) {
-    echo "Admin 'valen' creado con éxito.";
+    echo "Admin creado con éxito.";
 } else {
     echo "Error: " . $stmt->error;
 }

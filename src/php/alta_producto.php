@@ -10,19 +10,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stock_minimo = $_POST["stock_minimo"];
     $precio_venta = $_POST["precio_venta"];
 
-    $sql = "INSERT INTO Producto (nombre, codigo, categoria, proveedor_id, stock_actual, stock_minimo, precio_venta)
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
+    // Verificar si el proveedor existe
+    $checkProveedor = $conexion->prepare("SELECT id FROM proveedor WHERE id = ?");
+    $checkProveedor->bind_param("i", $proveedor_id);
+    $checkProveedor->execute();
+    $resultado = $checkProveedor->get_result();
 
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("sssiiid", $nombre, $codigo, $categoria, $proveedor_id, $stock_actual, $stock_minimo, $precio_venta);
-
-    if ($stmt->execute()) {
-        echo "Producto agregado correctamente.";
+    if ($resultado->num_rows === 0) {
+        // Proveedor no existe
+        echo "<script>
+            alert('Error: El proveedor no existe.');
+            window.location.href = '../componentes/formAlta_producto.php';
+        </script>";
     } else {
-        echo "Error: " . $stmt->error;
+        // Insertar el producto
+        $sql = "INSERT INTO Producto (nombre, codigo, categoria, proveedor_id, stock_actual, stock_minimo, precio_venta)
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            $stmt = $conexion->prepare($sql);
+            $stmt->bind_param("sssiiid", $nombre, $codigo, $categoria, $proveedor_id, $stock_actual, $stock_minimo, $precio_venta);
+
+            if ($stmt->execute()) {
+                echo "<script>
+                    alert('Producto agregado correctamente.');
+                    window.location.href = '../componentes/formAlta_producto.php';
+                </script>";
+            } else {
+                echo "<script>
+                    alert('Error al agregar el producto: " . addslashes($stmt->error) . "');
+                    window.location.href = '../componentes/formAlta_producto.php';
+                </script>";
+            }
+
+            $stmt->close();
+        } catch (mysqli_sql_exception $e) {
+            echo "<script>
+                alert('Error inesperado: " . addslashes($e->getMessage()) . "');
+                window.location.href = '../componentes/formAlta_producto.php';
+            </script>";
+        }
     }
 
-    $stmt->close();
+    $checkProveedor->close();
     $conexion->close();
 }
 ?>

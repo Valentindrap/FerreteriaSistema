@@ -3,7 +3,7 @@ session_start();
 
 // Verifica si hay una sesión iniciada de administrador
 if (!isset($_SESSION['admin'])) {
-    header("Location: adminlogin.html");
+    header("Location: ../index.html");
     exit();
 }
 ?>
@@ -28,5 +28,7 @@ if (!isset($_SESSION['admin'])) {
 
     <input type="submit" value="Agregar Proveedor">
   </form>
+
+    <a href="../componentes/altaybaja.php">Volver</a>
 </body>
 </html>

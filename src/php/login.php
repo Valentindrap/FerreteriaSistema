@@ -16,7 +16,7 @@ if ($resultado->num_rows === 1) {
     
     if (password_verify($contrasena, $admin['contrasena'])) {
         $_SESSION['admin'] = $admin['usuario'];
-        header("Location: ../html/altaybaja.php");
+        header("Location: ../componentes/altaybaja.php");
         exit();
     } else {
         echo "Contraseña incorrecta.";

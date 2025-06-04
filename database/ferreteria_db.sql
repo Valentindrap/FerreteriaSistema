@@ -37,8 +37,6 @@ CREATE TABLE `admins` (
 -- Volcado de datos para la tabla `admins`
 --
 
-INSERT INTO `admins` (`id`, `usuario`, `contrasena`) VALUES
-(2, 'valen', '$2y$10$J8shxZAI33w7IZQ23ARvKuR0O8o/6nOHiiM8sweaCFeOqVwNhM3kq');
 
 -- --------------------------------------------------------
 
@@ -140,8 +138,6 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id`, `nombre`, `codigo`, `categoria`, `proveedor_id`, `stock_actual`, `stock_minimo`, `precio_venta`) VALUES
-(1, 'valen', '23', 'tornillo', 1, 200, 10, 120.00);
 
 -- --------------------------------------------------------
 
@@ -160,9 +156,6 @@ CREATE TABLE `proveedor` (
 -- Volcado de datos para la tabla `proveedor`
 --
 
-INSERT INTO `proveedor` (`id`, `nombre`, `contacto`, `email`) VALUES
-(1, 'valen', '2302435563', 'Taniajazmin101@gmail.com'),
-(3, 'pablo', '34534545', 'pablo@gmail.com');
 
 -- --------------------------------------------------------
 
